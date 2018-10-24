@@ -1,29 +1,31 @@
+#
 # Conditional build:
-%bcond_without	doc	# Sphinx documentation
-%bcond_without	tests	# unit tests
 %bcond_without	python2 # CPython 2.x module
 %bcond_without	python3 # CPython 3.x module
+%bcond_with	tests	# unit tests (not included in package)
 
 %define		module		asn1crypto
 %define		egg_name	asn1crypto
 %define		pypi_name	asn1crypto
 Summary:	Python ASN.1 library with a focus on performance and a pythonic API
+Summary(pl.UTF-8):	Biblioteka ASN.1 dla Pythona zorientowana na wydajność i pythonowe API
 Name:		python-%{pypi_name}
 Version:	0.24.0
 Release:	1
 License:	MIT
 Group:		Libraries/Python
-Source0:	https://files.pythonhosted.org/packages/fc/f1/8db7daa71f414ddabfa056c4ef792e1461ff655c2ae2928a2b675bfed6b4/%{pypi_name}-%{version}.tar.gz
+#Source0Download: https://pypi.org/simple/asn1crypto/
+Source0:	https://files.pythonhosted.org/packages/source/a/asn1crypto/%{pypi_name}-%{version}.tar.gz
 # Source0-md5:	de3520426e81a6581352d4366f310eb1
 URL:		https://pypi.org/project/asn1crypto/
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.714
 %if %{with python2}
-BuildRequires:	python-modules
+BuildRequires:	python-modules >= 1:2.6
 BuildRequires:	python-setuptools
 %endif
 %if %{with python3}
-BuildRequires:	python3-modules
+BuildRequires:	python3-modules >= 1:3.2
 BuildRequires:	python3-setuptools
 %endif
 Requires:	python-modules
@@ -35,8 +37,14 @@ Fast ASN.1 parser and serializer with definitions for private keys,
 public keys, certificates, CRL, OCSP, CMS, PKCS#3, PKCS#7, PKCS#8,
 PKCS#12, PKCS#5, X.509 and TSP.
 
+%description -l pl.UTF-8
+Szybki parser i serializer ASN1 z definicjami dla kluczy prywatnych,
+kluczy publicznych, certyfikatów, CRL, OCSP, CMS, PKCS#3, PKCS#7,
+PKCS#8, PKCS#12, PKCS#5, X.509 i TSP.
+
 %package -n python3-%{pypi_name}
 Summary:	Python ASN.1 library with a focus on performance and a pythonic API
+Summary(pl.UTF-8):	Biblioteka ASN.1 dla Pythona zorientowana na wydajność i pythonowe API
 Group:		Libraries/Python
 Requires:	python3-modules
 
@@ -44,6 +52,11 @@ Requires:	python3-modules
 Fast ASN.1 parser and serializer with definitions for private keys,
 public keys, certificates, CRL, OCSP, CMS, PKCS#3, PKCS#7, PKCS#8,
 PKCS#12, PKCS#5, X.509 and TSP.
+
+%description -n python3-%{pypi_name} -l pl.UTF-8
+Szybki parser i serializer ASN1 z definicjami dla kluczy prywatnych,
+kluczy publicznych, certyfikatów, CRL, OCSP, CMS, PKCS#3, PKCS#7,
+PKCS#8, PKCS#12, PKCS#5, X.509 i TSP.
 
 %prep
 %setup -q -n %{pypi_name}-%{version}
@@ -62,12 +75,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %if %{with python2}
 %py_install
-
-# when files are installed in other way that standard 'setup.py
-# they need to be (re-)compiled
-# change %{py_sitedir} to %{py_sitescriptdir} for 'noarch' packages!
-%py_ocomp $RPM_BUILD_ROOT%{py_sitedir}
-%py_comp $RPM_BUILD_ROOT%{py_sitedir}
 
 %py_postclean
 %endif
