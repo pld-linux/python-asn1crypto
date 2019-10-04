@@ -2,7 +2,7 @@
 # Conditional build:
 %bcond_without	python2 # CPython 2.x module
 %bcond_without	python3 # CPython 3.x module
-%bcond_with	tests	# unit tests (not included in package)
+%bcond_without	tests	# unit tests
 
 %define		module		asn1crypto
 %define		egg_name	asn1crypto
@@ -10,13 +10,15 @@
 Summary:	Python ASN.1 library with a focus on performance and a pythonic API
 Summary(pl.UTF-8):	Biblioteka ASN.1 dla Pythona zorientowana na wydajność i pythonowe API
 Name:		python-%{pypi_name}
-Version:	0.24.0
+Version:	1.0.0
 Release:	1
 License:	MIT
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/asn1crypto/
 Source0:	https://files.pythonhosted.org/packages/source/a/asn1crypto/%{pypi_name}-%{version}.tar.gz
-# Source0-md5:	de3520426e81a6581352d4366f310eb1
+# Source0-md5:	db9c4ca2b029bd6cea14965a1d868693
+Source1:	https://files.pythonhosted.org/packages/source/a/asn1crypto_tests/asn1crypto_tests-%{version}.tar.gz
+# Source1-md5:	9ef09049ee14aecd156b9a89122f5534
 URL:		https://pypi.org/project/asn1crypto/
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.714
@@ -59,7 +61,11 @@ kluczy publicznych, certyfikatów, CRL, OCSP, CMS, PKCS#3, PKCS#7,
 PKCS#8, PKCS#12, PKCS#5, X.509 i TSP.
 
 %prep
-%setup -q -n %{pypi_name}-%{version}
+%setup -q -n %{pypi_name}-%{version} %{?with_tests:-a1}
+
+%if %{with tests}
+%{__mv} asn1crypto_tests-%{version} tests
+%endif
 
 %build
 %if %{with python2}
@@ -89,7 +95,7 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with python2}
 %files
 %defattr(644,root,root,755)
-%doc changelog.md readme.md
+%doc LICENSE changelog.md readme.md
 %{py_sitescriptdir}/%{module}
 %{py_sitescriptdir}/%{egg_name}-%{version}-py*.egg-info
 %endif
@@ -97,7 +103,7 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with python3}
 %files -n python3-%{pypi_name}
 %defattr(644,root,root,755)
-%doc changelog.md readme.md
+%doc LICENSE changelog.md readme.md
 %{py3_sitescriptdir}/%{module}
 %{py3_sitescriptdir}/%{egg_name}-%{version}-py*.egg-info
 %endif
