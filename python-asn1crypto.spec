@@ -10,15 +10,15 @@
 Summary:	Python ASN.1 library with a focus on performance and a pythonic API
 Summary(pl.UTF-8):	Biblioteka ASN.1 dla Pythona zorientowana na wydajność i pythonowe API
 Name:		python-%{pypi_name}
-Version:	1.2.0
+Version:	1.3.0
 Release:	1
 License:	MIT
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/asn1crypto/
 Source0:	https://files.pythonhosted.org/packages/source/a/asn1crypto/%{pypi_name}-%{version}.tar.gz
-# Source0-md5:	fc3815cdd4812505e3ee297740c5f5d3
+# Source0-md5:	daad112940181917e3ff169b47b9bd9a
 Source1:	https://files.pythonhosted.org/packages/source/a/asn1crypto_tests/asn1crypto_tests-%{version}.tar.gz
-# Source1-md5:	c2eb5724cc6ac0bf35cf9c745a8c2435
+# Source1-md5:	caf691cf224d01d18a21bfdfaeb4b505
 URL:		https://pypi.org/project/asn1crypto/
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.714
