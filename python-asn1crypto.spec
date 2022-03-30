@@ -11,7 +11,7 @@ Summary:	Python ASN.1 library with a focus on performance and a pythonic API
 Summary(pl.UTF-8):	Biblioteka ASN.1 dla Pythona zorientowana na wydajność i pythonowe API
 Name:		python-%{pypi_name}
 Version:	1.3.0
-Release:	4
+Release:	5
 License:	MIT
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/asn1crypto/
