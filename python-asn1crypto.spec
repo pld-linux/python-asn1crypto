@@ -10,15 +10,15 @@
 Summary:	Python ASN.1 library with a focus on performance and a pythonic API
 Summary(pl.UTF-8):	Biblioteka ASN.1 dla Pythona zorientowana na wydajność i pythonowe API
 Name:		python-%{pypi_name}
-Version:	1.3.0
-Release:	5
+Version:	1.5.1
+Release:	1
 License:	MIT
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/asn1crypto/
 Source0:	https://files.pythonhosted.org/packages/source/a/asn1crypto/%{pypi_name}-%{version}.tar.gz
-# Source0-md5:	daad112940181917e3ff169b47b9bd9a
+# Source0-md5:	f7a5271af9b81246fbdf57d703afce2f
 Source1:	https://files.pythonhosted.org/packages/source/a/asn1crypto_tests/asn1crypto_tests-%{version}.tar.gz
-# Source1-md5:	caf691cf224d01d18a21bfdfaeb4b505
+# Source1-md5:	07adf2c937fb90adbecc125b17eeaa1a
 URL:		https://pypi.org/project/asn1crypto/
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.714
@@ -30,7 +30,7 @@ BuildRequires:	python-setuptools
 BuildRequires:	python3-modules >= 1:3.2
 BuildRequires:	python3-setuptools
 %endif
-Requires:	python-modules
+Requires:	python-modules >= 1:2.6
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -48,7 +48,7 @@ PKCS#8, PKCS#12, PKCS#5, X.509 i TSP.
 Summary:	Python ASN.1 library with a focus on performance and a pythonic API
 Summary(pl.UTF-8):	Biblioteka ASN.1 dla Pythona zorientowana na wydajność i pythonowe API
 Group:		Libraries/Python
-Requires:	python3-modules
+Requires:	python3-modules >= 1:3.2
 
 %description -n python3-%{pypi_name}
 Fast ASN.1 parser and serializer with definitions for private keys,
